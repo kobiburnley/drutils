@@ -43,7 +43,7 @@ public class QueryStringTest {
 
     @org.junit.Test
     public void queryStringEntry() throws Exception {
-        Map.Entry<String, String> entry = QueryString.queryStringEntry("a=1");
+        Map.Entry<String, String> entry = QueryString.queryStringEntry("a=1", "=");
         assertEquals("a", entry.getKey());
         assertEquals("1", entry.getValue());
     }

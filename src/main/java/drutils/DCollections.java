@@ -64,6 +64,17 @@ public class DCollections {
         return list;
     }
 
+    public static <T> T find(Collection<T> collection, Predicate<? super T> predicate) {
+        if (collection != null) {
+            for (T t : collection) {
+                if (t != null && predicate.apply(t)) {
+                    return t;
+                }
+            }
+        }
+        return null;
+    }
+
     public static <T> List<T> range(List<T> list, int start, int end) {
         List<T> collection = new ArrayList<>();
         if (!isEmpty(list)) {
@@ -95,6 +106,34 @@ public class DCollections {
             }
         }
         return collection;
+    }
+
+    public static <T> List<Map.Entry<T, Integer>> zip(Collection<T> collection) {
+        List<Map.Entry<T, Integer>> arrayList = new ArrayList<>();
+        if (collection != null) {
+            int i = 0;
+            for (T next : collection) {
+                if (next != null) {
+                    arrayList.add(new AbstractMap.SimpleImmutableEntry<>(next, i));
+                }
+                i++;
+            }
+        }
+        return arrayList;
+    }
+
+    public static Map<String, Integer> zipWithIndexMap(Collection<String> collection) {
+        return keyBy(zip(collection), new Function<Map.Entry<String, Integer>, String>() {
+            @Override
+            public String apply(Map.Entry<String, Integer> params) {
+                return params.getKey();
+            }
+        }, new Function<Map.Entry<String, Integer>, Integer>() {
+            @Override
+            public Integer apply(Map.Entry<String, Integer> params) {
+                return params.getValue();
+            }
+        });
     }
 
     public static <T> String toString(Collection<T> collection) {
