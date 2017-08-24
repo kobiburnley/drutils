@@ -1,6 +1,5 @@
-package drutils;
+package drutils.optional;
 
-import java.util.Optional;
 
 /**
  * Created by kobi on 08/10/16.
